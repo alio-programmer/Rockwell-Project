@@ -9,12 +9,20 @@ const querypostcontroller = async (req, res) => {
       return res.status(400).json({ message: "Query is required" });
     }
     const response = await genAImodel(query);
-    const { department, reply, solution_for_backend } = response;
+    const {
+      department,
+      reply,
+      solution_for_backend,
+      querySentiment,
+      priority,
+    } = response;
     const newQuery = await Query.create({
       department,
       query,
       queryResponse: reply,
       querySolution: solution_for_backend,
+      priority,
+      querySentiment,
     });
     if (newQuery) {
       return res

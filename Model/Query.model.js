@@ -27,6 +27,16 @@ const querySchema = mongoose.Schema(
       default: false,
       required: true,
     },
+    priority: {
+      type: String,
+      enum: ["None", "Low", "Medium", "High"],
+      required: true,
+    },
+    querySentiment: {
+      type: String,
+      enum: ["Positive", "Negative", "Neutral"],
+      required: true,
+    },
   },
   { timestamps: true }
 );
