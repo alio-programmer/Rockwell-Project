@@ -2,6 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const connectDB = require("./DB");
 const Queryrouter = require("../Routes/Query.routes");
+const Summaryrouter = require("../Routes/Summarizer.routes");
 
 //configurations
 dotenv.config();
@@ -24,6 +25,7 @@ const startserver = async () => {
 
 //routes
 app.use("/api", Queryrouter);
+app.use("/", Summaryrouter);
 
 app.get("/", (req, res) => {
   res.send("API is running");
