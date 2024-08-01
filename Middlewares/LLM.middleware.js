@@ -1,5 +1,7 @@
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const { pretify } = require("../Common/pretify");
+const dotenv = require("dotenv");
+dotenv.config();
 
 const genAImodel = async (prompt) => {
   const genAI = new GoogleGenerativeAI(process.env.API_KEY);
