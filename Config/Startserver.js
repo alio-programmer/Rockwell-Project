@@ -10,13 +10,13 @@ const app = express();
 
 //middlewares
 app.use(express.json());
-
+const PORT = process.env.PORT || 5000;
 const startserver = async () => {
   await connectDB();
 
   try {
-    app.listen(5000, () => {
-      console.log("server listening on http://localhost:5000");
+    app.listen(PORT, () => {
+      console.log(`server listening on http://localhost:${PORT}`);
     });
   } catch (error) {
     console.log(error.message);
