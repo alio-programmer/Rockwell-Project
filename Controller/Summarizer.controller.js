@@ -5,13 +5,12 @@ const Summary = require("../Model/Summary.model");
 const Summarizer = async (req, res) => {
   try {
     const { year, month, timeframe } = req.body;
-    // let monthtimeframe = 0;
-    // let yeartimeframe = 0;
-    // if (timeframe >= 12) {
-    //   monthtimeframe += timeframe % 12;
-    //   yeartimeframe += timeframe / 12;
-    // }
-    const startdate = new Date(year, month - 1, 1);
+    const monthtimeframe = timeframe % 12;
+    let yeartimeframe = 0;
+    if (timeframe > 12) {
+      yeartimeframe = Math.floor(timeframe / 12);
+    }
+    const startdate = new Date(year - yeartimeframe, month - monthtimeframe, 1);
     const enddate = new Date(year, month, 1);
     const data = await Query.find({
       createdAt: { $gte: startdate, $lt: enddate },
