@@ -1,6 +1,7 @@
 const bcrypt = require("bcryptjs");
 const { User } = require("../Model/Auth.model");
 const { generatetoken } = require("../Common/Generatetoken");
+
 const signup = async (req, res) => {
   try {
     const { username, password, email, role } = req.body;
@@ -22,19 +23,50 @@ const signup = async (req, res) => {
     });
     if (newUser) {
       generatetoken(newUser._id, res);
-      return res.status(201).json(
-        {
-          _id: newUser._id,
-          username: newUser.username,
-          email: newUser.email,
-          role: newUser.role,
-        },
-        { message: "User created successfully" }
-      );
+      const response = {
+        _id: newUser._id,
+        username: newUser.username,
+        email: newUser.email,
+        role: newUser.role,
+      };
+      return res
+        .json({ response, message: "User created successfully" })
+        .status(201);
     }
   } catch (error) {
-    return res.json({ error: "Internal Server Error", error }).status(500);
+    return res.status(500).json({ error: error.message });
   }
 };
 
-modules.export = { signup };
+const login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.json({ message: "user not found" }).status(404);
+    }
+    const ispasswordtrue = await bcrypt.compare(password, user.password);
+    if (!ispasswordtrue) {
+      return res.json({ message: "password is incorrect" }).status(400);
+    }
+    generatetoken(user._id, res);
+    res.status(200).json({
+      _id: user._id,
+      username: user.username,
+      email: user.email,
+    });
+  } catch (error) {
+    return res.json({ error: "Internal server error" }).status(500);
+  }
+};
+
+const logout = async (req, res) => {
+  try {
+    res.cookie("jwt", "", { maxAge: 0 });
+    return res.json({ message: "logged out successfully" }).status(200);
+  } catch (error) {
+    return res.json({ error: "Internal server error" }).status(500);
+  }
+};
+
+module.exports = { signup, login, logout };

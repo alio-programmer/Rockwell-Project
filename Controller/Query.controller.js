@@ -67,13 +67,11 @@ const queryupdatecontroller = async (req, res) => {
       new: true,
     });
     if (updatedQuery) {
-      return res
-        .status(200)
-        .json({
-          oldquery,
-          updatedQuery,
-          message: "Query updated successfully",
-        });
+      return res.status(200).json({
+        oldquery,
+        updatedQuery,
+        message: "Query updated successfully",
+      });
     }
     return res.status(400).json({
       message: "Query not updated due to server error please try again",
