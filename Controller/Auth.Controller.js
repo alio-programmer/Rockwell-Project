@@ -41,19 +41,22 @@ const signup = async (req, res) => {
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const user = await User.findOne({ email });
-    if (!user) {
+    if (!email || !password) {
+      return res.json({ message: "All fields not provided" }).status(400);
+    }
+    const finduser = await User.findOne({ email });
+    if (!finduser) {
       return res.json({ message: "user not found" }).status(404);
     }
-    const ispasswordtrue = await bcrypt.compare(password, user.password);
+    const ispasswordtrue = await bcrypt.compare(password, finduser.password);
     if (!ispasswordtrue) {
       return res.json({ message: "password is incorrect" }).status(400);
     }
-    generatetoken(user._id, res);
+    generatetoken(finduser._id, res);
     res.status(200).json({
-      _id: user._id,
-      username: user.username,
-      email: user.email,
+      _id: finduser._id,
+      username: finduser.username,
+      email: finduser.email,
     });
   } catch (error) {
     return res.json({ error: "Internal server error" }).status(500);
