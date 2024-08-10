@@ -5,6 +5,9 @@ const { generatetoken } = require("../Common/Generatetoken");
 const signup = async (req, res) => {
   try {
     const { username, password, email, role } = req.body;
+    if (!username || !password || !email || !role) {
+      return res.status(400).json({ error: "All fields are required" });
+    }
     const isusername = await User.findOne({
       $or: [{ username: username }, { email: email }],
     });
@@ -42,7 +45,7 @@ const login = async (req, res) => {
   try {
     const { email, password } = req.body;
     if (!email || !password) {
-      return res.json({ message: "All fields not provided" }).status(400);
+      return res.json({ message: "All fields not provided" }).status(404);
     }
     const finduser = await User.findOne({ email });
     if (!finduser) {
