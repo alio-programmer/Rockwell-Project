@@ -60,6 +60,7 @@ const login = async (req, res) => {
       _id: finduser._id,
       username: finduser.username,
       email: finduser.email,
+      role: finduser.role,
     });
   } catch (error) {
     return res.json({ error: "Internal server error" }).status(500);
