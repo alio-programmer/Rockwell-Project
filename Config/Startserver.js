@@ -19,7 +19,7 @@ app.use(
     origin: [
       "http://localhost:5173",
       "http://localhost:3000",
-      "https://rockwell-frontend.vercel.app",
+      "https://rockwell-frontend-bvch7770e-gauravsinghbisht3gmailcoms-projects.vercel.app",
     ],
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
     credentials: true,
