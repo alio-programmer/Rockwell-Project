@@ -33,8 +33,8 @@ const signup = async (req, res) => {
         role: newUser.role,
       };
       return res
-        .json({ response, message: "User created successfully" })
-        .status(201);
+        .status(201)
+        .json({ response, message: "User created successfully" });
     }
   } catch (error) {
     return res.status(500).json({ error: error.message });
@@ -45,15 +45,15 @@ const login = async (req, res) => {
   try {
     const { email, password } = req.body;
     if (!email || !password) {
-      return res.json({ message: "All fields not provided" }).status(404);
+      return res.status(404).json({ error: "All fields not provided" });
     }
     const finduser = await User.findOne({ email });
     if (!finduser) {
-      return res.json({ message: "user not found" }).status(404);
+      return res.status(404).json({ error: "user not found" });
     }
     const ispasswordtrue = await bcrypt.compare(password, finduser.password);
     if (!ispasswordtrue) {
-      return res.json({ message: "password is incorrect" }).status(400);
+      return res.status(400).json({ error: "password is incorrect" });
     }
     generatetoken(finduser._id, res);
     res.status(200).json({
@@ -63,16 +63,16 @@ const login = async (req, res) => {
       role: finduser.role,
     });
   } catch (error) {
-    return res.json({ error: "Internal server error" }).status(500);
+    return res.status(500).json({ error: "Internal server error" });
   }
 };
 
 const logout = async (req, res) => {
   try {
     res.cookie("jwt", "", { maxAge: 0 });
-    return res.json({ message: "logged out successfully" }).status(200);
+    return res.status(200).json({ message: "logged out successfully" });
   } catch (error) {
-    return res.json({ error: "Internal server error" }).status(500);
+    return res.status(500).json({ error: "Internal server error" });
   }
 };
 
