@@ -5,6 +5,7 @@ const Queryrouter = require("../Routes/Query.routes");
 const Summaryrouter = require("../Routes/Summarizer.routes");
 const Authrouter = require("../Routes/Auth.routes");
 const cookies = require("cookie-parser");
+const cors = require("cors");
 
 //configurations
 dotenv.config();
@@ -13,6 +14,12 @@ const app = express();
 //middlewares
 app.use(express.json());
 app.use(cookies());
+app.use(
+  cors({
+    originL: "*",
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+  })
+);
 
 //connect to server and database
 const PORT = process.env.PORT || 5000;
