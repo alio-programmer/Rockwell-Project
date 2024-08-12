@@ -4,7 +4,7 @@ const connectDB = require("./DB");
 const Queryrouter = require("../Routes/Query.routes");
 const Summaryrouter = require("../Routes/Summarizer.routes");
 const Authrouter = require("../Routes/Auth.routes");
-const cookies = require("cookie-parser");
+const cookieParser = require("cookie-parser");
 const cors = require("cors");
 
 //configurations
@@ -13,7 +13,7 @@ const app = express();
 
 //middlewares
 app.use(express.json());
-app.use(cookies());
+app.use(cookieParser());
 app.use(
   cors({
     originL: "*",
