@@ -33,7 +33,7 @@ const signup = async (req, res) => {
         role: newUser.role,
       };
       return res
-        .status(201)
+        .status(200)
         .json({ response, message: "User created successfully" });
     }
   } catch (error) {
