@@ -19,7 +19,7 @@ app.use(
     origin: [
       "http://localhost:5173",
       "http://localhost:3000",
-      "https://rockwell-frontend-bvch7770e-gauravsinghbisht3gmailcoms-projects.vercel.app",
+      "https://rockwell-frontend.onrender.com",
     ],
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
     credentials: true,
@@ -45,7 +45,7 @@ app.use("/api", Queryrouter);
 app.use("/summary", Summaryrouter);
 app.use("/auth", Authrouter);
 
-app.get("/", (req, res) => {
+app.get("/working", (req, res) => {
   res.send("API is running");
 });
 
