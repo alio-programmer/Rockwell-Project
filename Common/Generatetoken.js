@@ -4,8 +4,9 @@ const generatetoken = (id, res) => {
     expiresIn: "7d",
   });
   res.cookie("jwt", token, {
-    httpOnly: process.env.NODE_ENV === "production" ? true : false,
-    secure: process.env.NODE_ENV === "production" ? true : false,
+    httpOnly: true,
+    secure: true,
+    sameSite: "None",
     maxAge: 7 * 24 * 60 * 60 * 1000,
   });
 };
