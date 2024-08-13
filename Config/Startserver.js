@@ -1,6 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const connectDB = require("./DB");
+const path = require("path");
 const Queryrouter = require("../Routes/Query.routes");
 const Summaryrouter = require("../Routes/Summarizer.routes");
 const Authrouter = require("../Routes/Auth.routes");
