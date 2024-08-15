@@ -7,7 +7,7 @@ const Summarizer = async (req, res) => {
     const { year, month, timeframe } = req.body;
     const monthtimeframe = timeframe % 12;
     let yeartimeframe = 0;
-    if (timeframe > 12) {
+    if (timeframe >= 12) {
       yeartimeframe = Math.floor(timeframe / 12);
     }
     const startdate = new Date(year - yeartimeframe, month - monthtimeframe, 1);
