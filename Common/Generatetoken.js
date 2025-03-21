@@ -12,6 +12,7 @@ const generatetoken = (id, res) => {
     domain: process.env.NODE_ENV === "production" ? ".onrender.com" : "",
     path: "/",
   });
+  return token;
 };
 
 module.exports = { generatetoken };
