@@ -17,8 +17,9 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "*",
-    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"]
+    origin: "https://rockwell-frontend.onrender.com",
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+    credentials: true
   })
 );
 
