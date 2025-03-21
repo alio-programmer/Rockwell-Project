@@ -25,12 +25,13 @@ const signup = async (req, res) => {
       role,
     });
     if (newUser) {
-      generatetoken(newUser._id, res);
+      const token = generatetoken(newUser._id, res);
       const response = {
         _id: newUser._id,
         username: newUser.username,
         email: newUser.email,
         role: newUser.role,
+        token: token,
       };
       return res
         .status(200)
@@ -55,12 +56,13 @@ const login = async (req, res) => {
     if (!ispasswordtrue) {
       return res.status(400).json({ error: "password is incorrect" });
     }
-    generatetoken(finduser._id, res);
+    const token = generatetoken(finduser._id, res);
     res.status(200).json({
       _id: finduser._id,
       username: finduser.username,
       email: finduser.email,
       role: finduser.role,
+      token: token,
     });
   } catch (error) {
     return res.status(500).json({ error: "Internal server error" });
