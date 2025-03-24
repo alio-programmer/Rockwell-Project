@@ -7,7 +7,7 @@ const { protectRoute } = require("../Config/Authenticate");
 
 const Queryrouter = express.Router();
 
-Queryrouter.post("/postquery", protectRoute, querypostcontroller);
-Queryrouter.put("/updatequery/:id", protectRoute, queryupdatecontroller);
+Queryrouter.post("/postquery", querypostcontroller);
+Queryrouter.put("/updatequery/:id", queryupdatecontroller);
 
 module.exports = Queryrouter;
