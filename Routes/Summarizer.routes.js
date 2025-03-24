@@ -3,6 +3,6 @@ const { Summarizer } = require("../Controller/Summarizer.controller");
 const { protectRoute } = require("../Config/Authenticate");
 const Summaryrouter = express.Router();
 
-Summaryrouter.post("/summarize", protectRoute, Summarizer);
+Summaryrouter.post("/summarize", Summarizer);
 
 module.exports = Summaryrouter;
